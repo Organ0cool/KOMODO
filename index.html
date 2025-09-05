@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KOMODO — Gestión de colas y tickets de Soporte TI</title>
+  <meta name="description" content="KOMODO: plataforma modular para gestionar colas, tickets e incidencias de soporte técnico con paneles, APIs e integraciones.">
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="./css/estilos.css">
+  <!-- Favicon (opcional, puedes usar un PNG cuadrado 32x32) -->
+  <link rel="icon" type="image/png" href="./img/logo.png" sizes="32x32">
+</head>
+<body>
+  <!-- ========= NAV ========= -->
+  <header>
+    <div class="container">
+      <nav>
+        <!-- Marca: versión horizontal con eslogan -->
+        <a class="brand brand--horizontal" href="#inicio" aria-label="Ir al inicio">
+          <img src="img/eslogan.png" alt="KOMODO — Tu solución en gestión de TI">
+        </a>
+
+        <div class="menu" id="menu">
+          <a href="#paquetes">Paquetes</a>
+          <a href="#caracteristicas">Características</a>
+          <a href="#precios">Precios</a>
+          <a href="#demo">Solicitar demo</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========= HERO ========= -->
+  <section id="inicio" class="hero section">
+    <div class="container wrap">
+      <div>
+        <span class="chip">Gestión de colas y tickets TI</span>
+        <h1>
+          Ordena tu soporte técnico con
+          <span class="grad">KOMODO</span>
+        </h1>
+        <p class="lead">
+          Plataforma modular para registrar incidencias, asignar prioridades, medir SLA y brindar experiencias de atención en tiempo real — desde ventanillas hasta chat y API.
+        </p>
+        <div class="actions">
+          <a class="btn" href="#demo">Solicitar demo</a>
+          <a class="btn ghost" href="#paquetes">Ver paquetes</a>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <small class="muted">Tickets/mes</small>
+            <div><b class="counter" data-target="120000">0</b></div>
+          </div>
+          <div class="stat">
+            <small class="muted">Reducción tiempo de espera</small>
+            <div><b class="counter" data-target="45">0</b><b>%</b></div>
+          </div>
+          <div class="stat">
+            <small class="muted">Disponibilidad</small>
+            <div><b>99.9%</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <!-- “Dispositivo” demo con parallax -->
+        <div class="device card reveal" aria-hidden="true">
+          <div class="ui">
+            <aside class="side">
+              <h4 style="margin:0 0 10px">Cola Activa</h4>
+              <div class="queue">
+                <div class="ticket"><span>#A-1042</span><small>Alta • Red</small></div>
+                <div class="ticket"><span>#A-1043</span><small>Media • Software</small></div>
+                <div class="ticket"><span>#A-1044</span><small>Baja • Consultas</small></div>
+                <div class="ticket"><span>#A-1045</span><small>Alta • Hardware</small></div>
+                <div class="ticket"><span>#A-1046</span><small>Media • Accesos</small></div>
+              </div>
+            </aside>
+            <main class="main">
+              <div class="pill">Panel del agente</div>
+              <h4 style="margin:10px 0">#A-1042 • Corte de red en piso 3</h4>
+              <p class="muted">Detectado por monitoreo. SLA: 2h. Asignado a: <b>Equipo NOC</b>.</p>
+              <div class="queue" style="margin-top:8px">
+                <div class="ticket" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.09)"><span>Diagnóstico</span><small>15 min</small></div>
+                <div class="ticket" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.09)"><span>Ejecución</span><small>35 min</small></div>
+                <div class="ticket" style="background:rgba(30,203,95,.08);"><span>Cierre</span><small>OK</small></div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= PAQUETES ========= -->
+  <section id="paquetes" class="section">
+    <div class="container">
+      <h2>Paquetes KOMODO</h2>
+      <p class="lead">Soluciones modulares y configurables para distintos escenarios de soporte técnico.</p>
+
+      <div class="cards">
+        <article class="card reveal">
+          <h3>KOMODO Core</h3>
+          <p>Sistema de tickets con prioridades, SLA, asignación automática, plantillas y base de conocimiento.</p>
+          <div class="actions">
+            <a class="btn" href="#demo">Cotizar</a>
+            <a class="btn ghost" href="#caracteristicas">Ver detalles</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h3>KOMODO Live</h3>
+          <p>Gestión de colas en sala: kioscos, turneros, pantallas y notificaciones en tiempo real.</p>
+          <div class="actions">
+            <a class="btn" href="#demo">Cotizar</a>
+            <a class="btn ghost" href="#caracteristicas">Ver detalles</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h3>KOMODO Chat</h3>
+          <p>Atiende por WhatsApp, WebChat o correo y genera tickets automáticamente con bots y reglas.</p>
+          <div class="actions">
+            <a class="btn" href="#demo">Cotizar</a>
+            <a class="btn ghost" href="#caracteristicas">Ver detalles</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= CARACTERÍSTICAS ========= -->
+  <section id="caracteristicas" class="section">
+    <div class="container">
+      <h2>Características clave</h2>
+      <p class="lead">Todo lo que necesitas para un soporte efectivo, medible y escalable.</p>
+
+      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="card reveal" style="padding:16px 16px 6px">
+          <h3>Ruteo inteligente</h3>
+          <p class="muted">Asignación por habilidades, horarios y carga. Reglas por prioridad e impacto.</p>
+        </div>
+        <div class="card reveal" style="padding:16px 16px 6px">
+          <h3>SLAs y OLAs</h3>
+          <p class="muted">Métricas en tiempo real, escalamiento automático y alertas proactivas.</p>
+        </div>
+        <div class="card reveal" style="padding:16px 16px 6px">
+          <h3>Omnicanal</h3>
+          <p class="muted">Web, correo, WhatsApp y panel de ventanilla integrados en un solo flujo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= PRECIOS ========= -->
+  <section id="precios" class="section">
+    <div class="container">
+      <h2>Precios</h2>
+      <p class="lead">Elige el plan que mejor se adapte a tu operación. Todos incluyen soporte y actualizaciones.</p>
+
+      <div class="cards">
+        <article class="card reveal">
+          <span class="pill">Starter</span>
+          <h3>US$ 49/mes</h3>
+          <ul>
+            <li>Hasta 3 agentes</li>
+            <li>Tickets + correo</li>
+            <li>Reportes esenciales</li>
+          </ul>
+          <a class="btn" href="#demo">Comenzar</a>
+        </article>
+
+        <article class="card reveal">
+          <span class="pill">Pro</span>
+          <h3>US$ 149/mes</h3>
+          <ul>
+            <li>Hasta 15 agentes</li>
+            <li>Chat + WhatsApp</li>
+            <li>SLAs y Analytics</li>
+          </ul>
+          <a class="btn" href="#demo">Probar Pro</a>
+        </article>
+
+        <article class="card reveal">
+          <span class="pill">Enterprise</span>
+          <h3>Solicitar</h3>
+          <ul>
+            <li>Agentes ilimitados</li>
+            <li>On-Premise/SSO/API</li>
+            <li>Soporte dedicado</li>
+          </ul>
+          <a class="btn" href="#contacto">Contactar ventas</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= DEMO / FORMULARIO ========= -->
+  <section id="demo" class="section">
+    <div class="container">
+      <h2>Solicitar una demo</h2>
+      <p class="lead">Déjanos tus datos y un asesor te contactará para configurar una demo a tu medida.</p>
+
+      <form id="demoForm" class="card reveal" style="padding:18px">
+        <div class="form-row">
+          <div>
+            <label for="nombre">Nombre y Apellido</label>
+            <input id="nombre" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div>
+            <label for="empresa">Empresa</label>
+            <input id="empresa" name="empresa" placeholder="Nombre de la empresa" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label for="email">Correo</label>
+            <input id="email" type="email" name="email" placeholder="tucorreo@empresa.com" required />
+          </div>
+          <div>
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" placeholder="+51 999 999 999" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label for="tamano">Tamaño del equipo</label>
+            <select id="tamano" name="tamano">
+              <option value="1-3">1–3 agentes</option>
+              <option value="4-15">4–15 agentes</option>
+              <option value="16-50">16–50 agentes</option>
+              <option value=">50">Más de 50</option>
+            </select>
+          </div>
+          <div>
+            <label for="paquete">Paquete de interés</label>
+            <select id="paquete" name="paquete">
+              <option>Core</option>
+              <option>Live</option>
+              <option>Chat</option>
+              <option>Analytics</option>
+              <option>API</option>
+              <option>Cloud/On-Prem</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos tu caso (SLA, canales, cantidad de tickets, etc.)"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn" type="submit">Enviar solicitud</button>
+          <a class="btn ghost" href="mailto:ventas@komodo.ti?subject=Solicitud%20de%20demo">Escribir por correo</a>
+          <a class="btn ghost" href="https://wa.me/0000000000" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <p id="formMsg" class="muted" style="margin:6px 0 0"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========= CONTACTO ========= -->
+  <section id="contacto" class="section">
+    <div class="container">
+      <h2>Contacto</h2>
+      <div class="grid" style="grid-template-columns: 1.1fr .9fr">
+        <div class="card reveal" style="padding:18px">
+          <h3>Ventas & Soporte</h3>
+          <p class="muted">¿Necesitas una cotización o soporte? Escríbenos.</p>
+          <ul>
+            <li>Email: <a href="mailto:soporte@komodo.ti">soporte@komodo.ti</a></li>
+            <li>Docs/API: <a href="#" target="_blank" rel="noopener">Documentación</a></li>
+            <li>Estado: <a href="#" target="_blank" rel="noopener">status.komodo.ti</a></li>
+          </ul>
+        </div>
+        <div class="card reveal" style="padding:18px">
+          <h3>Preguntas frecuentes</h3>
+          <details>
+            <summary>¿Puedo migrar desde otro sistema de tickets?</summary>
+            <p class="muted">Sí. Ofrecemos utilidades de importación (CSV/JSON) y soporte de migración asistida.</p>
+          </details>
+          <details>
+            <summary>¿Tienen app móvil?</summary>
+            <p class="muted">La vista web es responsive. App nativa bajo consulta para Enterprise.</p>
+          </details>
+          <details>
+            <summary>¿Cómo se asegura el SLA?</summary>
+            <p class="muted">Medimos cada etapa, disparamos alertas y escalamos a equipos de respaldo automáticamente.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= FOOTER ========= -->
+  <footer>
+    <div class="container footer-wrap">
+      <div>
+        <!-- Marca: versión sello vertical -->
+        <a class="brand brand--vertical" href="#inicio" aria-label="Volver al inicio">
+          <img src="img/logovertical.png" alt="KOMODO — Tu solución en gestión de TI">
+        </a>
+        <p class="muted" style="margin:10px 0 0">© <span id="year"></span> KOMODO. Todos los derechos reservados.</p>
+      </div>
+      <div class="footer-links">
+        <a class="pill" href="#paquetes">Paquetes</a>
+        <a class="pill" href="#caracteristicas">Características</a>
+        <a class="pill" href="#precios">Precios</a>
+        <a class="pill" href="#demo">Demo</a>
+        <a class="pill" href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========= JS INTEGRADO ========= -->
+  <script>
+    // ===== Menú móvil =====
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    if (burger && menu) {
+      burger.addEventListener('click', () => {
+        const isOpen = menu.style.display === 'flex';
+        menu.style.display = isOpen ? 'none' : 'flex';
+        burger.setAttribute('aria-expanded', String(!isOpen));
+      });
+    }
+
+    // ===== Animación Reveal (Intersection Observer) =====
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ===== Contadores animados =====
+    const counters = document.querySelectorAll('.counter');
+    const runCounter = (el) => {
+      const target = +el.dataset.target;
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 120)); // ~2s a 60fps
+
+      const inc = () => {
+        current += step;
+        if (current >= target) current = target;
+        el.textContent = current.toLocaleString();
+        if (current < target) requestAnimationFrame(inc);
+      };
+      inc();
+    };
+    const cObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          runCounter(e.target);
+          cObs.unobserve(e.target);
+        }
+      });
+    });
+    counters.forEach(c => cObs.observe(c));
+
+    // ===== Parallax sutil en la tarjeta demo =====
+    const device = document.querySelector('.device');
+    if (device) {
+      device.addEventListener('mousemove', (e) => {
+        const r = device.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        device.style.transform = `perspective(800px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+      });
+      device.addEventListener('mouseleave', () => device.style.transform = 'none');
+    }
+
+    // ===== Validación básica de formulario =====
+    const form = document.getElementById('demoForm');
+    const msg = document.getElementById('formMsg');
+    if (form && msg) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        if (!/^\S+@\S+\.\S+$/.test(data.email || '')) {
+          msg.textContent = 'Por favor ingresa un correo válido.';
+          msg.style.color = '#ffb0b0';
+          return;
+        }
+        msg.style.color = 'var(--muted)';
+        msg.textContent = 'Gracias. Hemos recibido tu solicitud y te contactaremos en breve.';
+        form.reset();
+      });
+    }
+
+    // ===== Año dinámico en footer =====
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
