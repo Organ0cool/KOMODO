@@ -155,47 +155,41 @@
   </section>
 
   <!-- ========= PRECIOS ========= -->
-  <section id="precios" class="section">
-    <div class="container">
-      <h2>Precios</h2>
-      <p class="lead">Elige el plan que mejor se adapte a tu operación. Todos incluyen soporte y actualizaciones.</p>
+  <div class="cards">
+  <article class="card reveal starter">
+    <span class="pill">Starter</span>
+    <h3>US$ 49/mes</h3>
+    <ul>
+      <li>Hasta 3 agentes</li>
+      <li>Tickets + correo</li>
+      <li>Reportes esenciales</li>
+    </ul>
+    <a class="btn" href="#demo">Comenzar</a>
+  </article>
 
-      <div class="cards">
-        <article class="card reveal">
-          <span class="pill">Starter</span>
-          <h3>US$ 49/mes</h3>
-          <ul>
-            <li>Hasta 3 agentes</li>
-            <li>Tickets + correo</li>
-            <li>Reportes esenciales</li>
-          </ul>
-          <a class="btn" href="#demo">Comenzar</a>
-        </article>
+  <article class="card reveal pro">
+    <span class="pill">Pro</span>
+    <h3>US$ 149/mes</h3>
+    <ul>
+      <li>Hasta 15 agentes</li>
+      <li>Chat + WhatsApp</li>
+      <li>SLAs y Analytics</li>
+    </ul>
+    <a class="btn" href="#demo">Probar Pro</a>
+  </article>
 
-        <article class="card reveal">
-          <span class="pill">Pro</span>
-          <h3>US$ 149/mes</h3>
-          <ul>
-            <li>Hasta 15 agentes</li>
-            <li>Chat + WhatsApp</li>
-            <li>SLAs y Analytics</li>
-          </ul>
-          <a class="btn" href="#demo">Probar Pro</a>
-        </article>
+  <article class="card reveal enterprise">
+    <span class="pill">Enterprise</span>
+    <h3>Solicitar</h3>
+    <ul>
+      <li>Agentes ilimitados</li>
+      <li>On-Premise/SSO/API</li>
+      <li>Soporte dedicado</li>
+    </ul>
+    <a class="btn" href="#contacto">Contactar ventas</a>
+  </article>
+</div>
 
-        <article class="card reveal">
-          <span class="pill">Enterprise</span>
-          <h3>Solicitar</h3>
-          <ul>
-            <li>Agentes ilimitados</li>
-            <li>On-Premise/SSO/API</li>
-            <li>Soporte dedicado</li>
-          </ul>
-          <a class="btn" href="#contacto">Contactar ventas</a>
-        </article>
-      </div>
-    </div>
-  </section>
 
   <!-- ========= DEMO / FORMULARIO ========= -->
   <section id="demo" class="section">
@@ -239,12 +233,9 @@
           <div>
             <label for="paquete">Paquete de interés</label>
             <select id="paquete" name="paquete">
-              <option>Core</option>
-              <option>Live</option>
-              <option>Chat</option>
-              <option>Analytics</option>
-              <option>API</option>
-              <option>Cloud/On-Prem</option>
+              <option>Starter</option>
+              <option>Pro</option>
+              <option>Enterprise<option>
             </select>
           </div>
         </div>
@@ -331,40 +322,58 @@
     }
 
     // ===== Animación Reveal (Intersection Observer) =====
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in-view');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-    // ===== Contadores animados =====
-    const counters = document.querySelectorAll('.counter');
-    const runCounter = (el) => {
-      const target = +el.dataset.target;
-      let current = 0;
-      const step = Math.max(1, Math.floor(target / 120)); // ~2s a 60fps
-
-      const inc = () => {
-        current += step;
-        if (current >= target) current = target;
-        el.textContent = current.toLocaleString();
-        if (current < target) requestAnimationFrame(inc);
-      };
-      inc();
-    };
-    const cObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          runCounter(e.target);
-          cObs.unobserve(e.target);
-        }
-      });
+    const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in-view');
+    } else {
+      e.target.classList.remove('in-view'); // <- se quita al salir para que pueda re-animar
+    }
     });
-    counters.forEach(c => cObs.observe(c));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    const counters = document.querySelectorAll('.counter');
+
+function runCounter(el) {
+  const target = +el.dataset.target;
+  const step = Math.max(1, Math.floor(target / 120)); // ~2s
+  let current = 0;
+
+  // Evitar múltiples animaciones simultáneas
+  if (el.dataset.animId) cancelAnimationFrame(+el.dataset.animId);
+
+  const inc = () => {
+    current += step;
+    if (current >= target) current = target;
+    el.textContent = current.toLocaleString();
+    if (current < target) {
+      const id = requestAnimationFrame(inc);
+      el.dataset.animId = String(id);
+    } else {
+      delete el.dataset.animId;
+    }
+  };
+  inc();
+}
+
+const countersObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    const el = e.target;
+    if (e.isIntersecting) {
+      runCounter(el);
+    } else {
+      // Al salir del viewport, cancelar y reiniciar a 0
+      if (el.dataset.animId) {
+        cancelAnimationFrame(+el.dataset.animId);
+        delete el.dataset.animId;
+      }
+      el.textContent = '0';
+    }
+  });
+}, { threshold: 0.3 });
+
+counters.forEach(c => countersObserver.observe(c));
 
     // ===== Parallax sutil en la tarjeta demo =====
     const device = document.querySelector('.device');

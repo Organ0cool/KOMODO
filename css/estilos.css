@@ -1,7 +1,3 @@
-/* =========================
-   KOMODO - estilos.css
-   ========================= */
-
 /* ---------- Variables & base ---------- */
 :root{
   --bg:#0b1020;
@@ -19,6 +15,7 @@ html,body{ height:100% }
 html{ scroll-behavior:smooth }
 body{
   margin:0;
+  padding-top: 50px;
   font:16px/1.5 Inter, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, sans-serif;
   color:var(--text);
   background:
@@ -64,14 +61,20 @@ body{
 
 /* ---------- Header / Nav ---------- */
 header{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(1.5) blur(10px);
-  background:rgba(11,16,32,.6);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 95px;
+  z-index: 50;
+  backdrop-filter: saturate(1.5) blur(10px);
+  background: rgba(11,16,32,.6);
+  border-bottom: 1px solid rgba(255,255,255,.06);
 }
+
 nav{ display:flex; align-items:center; justify-content:space-between; height:90px }
 .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text) }
-.brand--horizontal img{ display:block; height:120px; margin-top:25px }
+.brand--horizontal img{ display:block; height:120px; margin-top:20px }
 .menu{ display:flex; gap:16px; align-items:center }
 .menu a{ color:var(--text); text-decoration:none; padding:8px 10px; border-radius:10px }
 .menu a:hover{ background:rgba(255,255,255,.06) }
@@ -112,10 +115,75 @@ nav{ display:flex; align-items:center; justify-content:space-between; height:90p
 .ticket small{ color:var(--muted) }
 
 /* ---------- Paquetes ---------- */
-.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px }
+.cards{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 5px;  /* reducido */
+  row-gap: 10px;
+  justify-content: stretch;
+}
 .card h3{ margin:10px 0 8px }
 .card p{ margin:0 0 14px }
 .card .actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+
+.card.starter,
+.card.pro,
+.card.enterprise {
+  position: relative; /* necesario para ::after */
+  color: #fff;        /* contraste del texto */
+  overflow: hidden;   /* evita que la imagen se salga al girar */
+}
+
+/* 🔹 Pseudo-elemento con la imagen */
+.card.starter::after,
+.card.pro::after,
+.card.enterprise::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 60%;          /* escala relativa al ancho de la tarjeta */
+  height: 60%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 1.5s ease;
+  z-index: 0;
+}
+
+/* 🔹 Asignar imágenes */
+.card.starter::after {
+  background-image: url('../img/starter.png');
+}
+.card.pro::after {
+  background-image: url('../img/PRO.png');
+}
+.card.enterprise::after {
+  background-image: url('../img/enterprise.png');
+}
+
+/* 🔹 Animación en hover (giro horizontal) */
+.card:hover::after {
+  transform: rotateY(360deg);
+}
+
+/* Asegurar que el contenido esté encima */
+.card * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ajustes de la tarjeta */
+.cards .card{
+  min-height: auto;
+  margin: 0;
+  padding: 20px;
+  background: none; /* quitamos el fondo directo */
+}
+.card.reveal{
+  padding: 25px; /* antes 18px */
+}
+
 
 /* ---------- Formularios ---------- */
 form{ display:grid; gap:14px }
@@ -133,7 +201,7 @@ footer{
   border-top:1px solid rgba(255,255,255,.08);
 }
 .footer-wrap{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap }
-.brand--vertical img{ display:block; height:72px }
+.brand--vertical img{ display:center; height: 150px }
 
 /* ---------- Animaciones reveal ---------- */
 .reveal{ opacity:0; transform:translateY(14px); filter:blur(1px) }
