@@ -11,9 +11,15 @@
   --radius: 18px;
 }
 *{ box-sizing:border-box }
-html,body{ height:100% }
-html{ scroll-behavior:smooth }
+
+html,body{ 
+  height:100% }
+html{ 
+  scroll-behavior:smooth }
 body{
+  min-height: 100vh; 
+  display: flex; 
+  flex-direction: column;
   margin:0;
   padding-top: 50px;
   font:16px/1.5 Inter, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, sans-serif;
@@ -82,7 +88,15 @@ nav{ display:flex; align-items:center; justify-content:space-between; height:90p
 
 /* ---------- Hero ---------- */
 .hero{ padding:80px 0 40px }
-.hero .wrap{ display:grid; grid-template-columns: 1.15fr .85fr; gap:28px; align-items:center }
+.hero .wrap{
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 28px;
+  align-items: center;
+}
+.hero .wrap > div:first-child{ order:1; }
+.hero .wrap > div:last-child{ order:2; }
+
 .hero h1{ font-size:clamp(2rem, 4vw, 3rem); margin:10px 0 12px }
 .hero p{ color:var(--muted); margin:0 0 22px }
 .hero .stats{ display:flex; gap:18px; flex-wrap:wrap; margin-top:8px }
@@ -114,76 +128,123 @@ nav{ display:flex; align-items:center; justify-content:space-between; height:90p
 }
 .ticket small{ color:var(--muted) }
 
-/* ---------- Paquetes ---------- */
-.cards{
+/* ===================== PRECIOS ===================== */
+#precios .cards{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 5px;  /* reducido */
-  row-gap: 10px;
-  justify-content: stretch;
-}
-.card h3{ margin:10px 0 8px }
-.card p{ margin:0 0 14px }
-.card .actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
-
-.card.starter,
-.card.pro,
-.card.enterprise {
-  position: relative; /* necesario para ::after */
-  color: #fff;        /* contraste del texto */
-  overflow: hidden;   /* evita que la imagen se salga al girar */
+  grid-template-columns: repeat(3, minmax(240px, 280px));
+  justify-content: center;
+  justify-items: center;
+  gap: 10px;
 }
 
-/* 🔹 Pseudo-elemento con la imagen */
-.card.starter::after,
-.card.pro::after,
-.card.enterprise::after {
-  content: "";
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  width: 60%;          /* escala relativa al ancho de la tarjeta */
-  height: 60%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: transform 1.5s ease;
-  z-index: 0;
-}
-
-/* 🔹 Asignar imágenes */
-.card.starter::after {
-  background-image: url('../img/starter.png');
-}
-.card.pro::after {
-  background-image: url('../img/PRO.png');
-}
-.card.enterprise::after {
-  background-image: url('../img/enterprise.png');
-}
-
-/* 🔹 Animación en hover (giro horizontal) */
-.card:hover::after {
-  transform: rotateY(360deg);
-}
-
-/* Asegurar que el contenido esté encima */
-.card * {
+#precios .card{
   position: relative;
-  z-index: 1;
-}
-
-/* Ajustes de la tarjeta */
-.cards .card{
-  min-height: auto;
+  width: 100%;
+  max-width: 280px;          /* más angosta */
+  min-height: 220px;         /* alto razonable */
   margin: 0;
-  padding: 20px;
-  background: none; /* quitamos el fondo directo */
-}
-.card.reveal{
-  padding: 25px; /* antes 18px */
+  padding: 16px 120px 16px 16px; /* reserva a la derecha para la imagen */
+  background: none;
+  overflow: hidden;
+  color: #fff;
 }
 
+/* Enterprise: botón suele ser más largo */
+#precios .card.enterprise{ padding-right: 150px; }
+
+/* Tipos compactos */
+#precios .card h3{ margin:10px 0 8px; font-size:1.1rem; }
+#precios .card ul{ font-size:.95rem; line-height:1.35; }
+#precios .card .btn{ white-space: nowrap; }
+
+/* Imagen rotatoria (sin bloquear clics) */
+#precios .card.starter::after,
+#precios .card.pro::after,
+#precios .card.enterprise::after{
+  content:"";
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  width:110px;
+  height:110px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  transition:transform .8s ease;
+  backface-visibility:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Asignación de imágenes */
+#precios .card.starter::after{    background-image:url('../img/starter.png'); }
+#precios .card.pro::after{        background-image:url('../img/PRO.png'); }     /* respeta tu nombre de archivo */
+#precios .card.enterprise::after{ background-image:url('../img/enterprise.png'); width:100px; height:100px; }
+
+/* Hover: giro horizontal */
+#precios .card:hover::after{ transform: rotateY(360deg); }
+
+/* Contenido por encima de la imagen */
+#precios .card *{ position:relative; z-index:1; }
+
+/* Breakpoints PRECIOS */
+@media (max-width: 990px){
+  #precios .cards{
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+  #precios .card{
+    max-width: 320px;
+    padding-right: 120px;
+  }
+  #precios .card.enterprise{ padding-right: 140px; }
+  #precios .card::after{
+    width:100px; height:100px; right:10px; bottom:10px;
+  }
+}
+
+@media (max-width: 640px){
+  #precios .cards{ grid-template-columns: 1fr; }
+  #precios .card{
+    max-width: 520px;
+    padding-right: 100px;
+  }
+  #precios .card.enterprise{ padding-right: 120px; }
+  #precios .card::after{
+    width:85px; height:85px; right:10px; bottom:10px;
+  }
+}
+
+/* ===================== PAQUETES ===================== */
+#paquetes .cards{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+#paquetes .card{
+  padding: 18px 20px;
+  min-height: 180px;
+  color: #cfeb9b;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 10px 30px rgba(0,0,0,.12);
+}
+
+/* Tipografía/espaciado propio de Paquetes */
+#paquetes .card h3{ font-size: 1.2rem; margin: 0 0 8px; }
+#paquetes .card p{ margin: 0; opacity: .92; }
+
+/* En paquetes NO hay imagen rotatoria */
+#paquetes .card::after{ content: none; }
+
+/* Breakpoints PAQUETES */
+@media (max-width: 990px){
+  #paquetes .cards{ grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+}
+@media (max-width: 640px){
+  #paquetes .cards{ grid-template-columns: 1fr; }
+}
 
 /* ---------- Formularios ---------- */
 form{ display:grid; gap:14px }
@@ -196,12 +257,61 @@ label{ font-weight:600 }
 .form-actions{ display:flex; gap:12px; align-items:center; flex-wrap:wrap }
 
 /* ---------- Footer ---------- */
-footer{
-  padding:40px 0 60px; color:var(--muted);
-  border-top:1px solid rgba(255,255,255,.08);
+.footer { margin-top: auto; }
+
+/* Estilos del footer */
+.footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 28px 0 36px;
 }
-.footer-wrap{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap }
-.brand--vertical img{ display:center; height: 150px }
+
+.footer .container{
+  display: grid;
+  grid-template-columns: auto 1fr auto;  /* izq: logo | centro: links | der: (vacío si no usas) */
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 12px;
+}
+
+/* Marca (izquierda) */
+.footer .brand{
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.footer .brand img{
+  width: 200px; height: auto; display: block;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+}
+.footer .brand-text strong{ display:block; line-height:1.1; }
+.footer .brand-text small{ opacity:.8; }
+
+/* Enlaces (centro) */
+.footer .links{
+  justify-self: end;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Copyright (centrado, ancho completo debajo) */
+.footer .copy{
+  grid-column: 1 / -1;   /* ocupa todo el ancho de la grid */
+  text-align: center;
+  color: #aeb7c7;
+  margin-top: 4px;
+}
+
+/* Responsive: en móvil todo al centro en columna */
+@media (max-width: 760px){
+  .footer .container{
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .footer .brand{ justify-self: center; }
+  .footer .links{ justify-self: center; }
+}
 
 /* ---------- Animaciones reveal ---------- */
 .reveal{ opacity:0; transform:translateY(14px); filter:blur(1px) }
@@ -224,4 +334,141 @@ footer{
   .brand--horizontal img{ height:32px }
   .brand--vertical img{ height:60px }
   .cards{ grid-template-columns:1fr }
+}
+
+/* === Burbujas sociales fijas === */
+.social-bubbles{
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2000;      /* por encima del header y tarjetas */
+  pointer-events: none; /* contenedor ignora clicks */
+}
+
+.social-bubbles .bubble{
+  pointer-events: auto;      /* los enlaces sí reciben click */
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  transform: translateZ(0);
+  transition: transform .25s ease, box-shadow .25s ease;
+  position: relative;
+}
+
+/* “Burbujita” flotando sutil */
+@keyframes bob {
+  0%,100% { transform: translateZ(0) translateY(0); }
+  50%     { transform: translateZ(0) translateY(-2px); }
+}
+.social-bubbles .bubble { animation: bob 4s ease-in-out infinite; }
+.social-bubbles .bubble:nth-child(2){ animation-delay:.2s; }
+.social-bubbles .bubble:nth-child(3){ animation-delay:.4s; }
+.social-bubbles .bubble:nth-child(4){ animation-delay:.6s; }
+
+.social-bubbles .bubble:hover{
+  transform: scale(1.08);
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
+}
+
+/* Etiqueta (tooltip) */
+.social-bubbles .bubble span{
+  position: absolute;
+  right: 58px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,.72);
+  color: #fff;
+  border-radius: 999px;
+  font-size: .78rem;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+.social-bubbles .bubble:hover span{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Colores de marca */
+.bubble.fb{ background:#1877F2; }
+.bubble.ig{ background:#E1306C; }
+.bubble.tt{ background:#000; }
+.bubble.x { background:#111; }
+
+/* Accesibilidad: foco con teclado */
+.social-bubbles .bubble:focus{
+  outline: 2px solid #fff3;
+  outline-offset: 2px;
+}
+
+/* Responsivo: en móvil, abajo a la derecha en fila */
+@media (max-width: 640px){
+  .social-bubbles{
+    top: auto;
+    bottom: 16px;
+    transform: none;
+    right: 12px;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .social-bubbles .bubble{
+    width: 44px; height: 44px;
+  }
+  .social-bubbles .bubble span{
+    display: none; /* oculta textos en móvil para no tapar contenido */
+  }
+}
+
+/* ====== Zoom-pan del mockup (panel derecho) ====== */
+.zoom-box{ 
+  display:block; 
+  width:100%; 
+  border-radius: var(--radius); 
+  overflow:hidden; }
+
+.zoom-inner{ 
+  display:block; 
+  width:100%; 
+  height:auto; }
+
+  @media (max-width: 980px){
+  .hero .wrap{ grid-template-columns: 1fr; }
+}
+
+/* Animación automática tipo “gif” */
+.zoom-auto .zoom-inner{
+  animation: panzoom 16s ease-in-out infinite;
+}
+
+/* Al pasar el mouse: pausa y aplica un zoom suave */
+.zoom-hover:hover .zoom-inner{
+  animation-play-state: paused;
+  transform: scale(1.12);
+}
+
+
+/* Trayectoria de paneo/zoom */
+@keyframes panzoom{
+  0%   { transform: translate(0,0) scale(1);      transform-origin: 50% 50%; }
+  20%  { transform: translate(-6%, -4%) scale(1.10); transform-origin: 20% 30%; }
+  40%  { transform: translate(-12%, -8%) scale(1.18); transform-origin: 80% 30%; }
+  60%  { transform: translate(-8%, -12%) scale(1.22); transform-origin: 80% 70%; }
+  80%  { transform: translate(-2%, -6%)  scale(1.12); transform-origin: 30% 70%; }
+  100% { transform: translate(0,0) scale(1);      transform-origin: 50% 50%; }
+}
+
+/* Respeta accesibilidad: menos movimiento */
+@media (prefers-reduced-motion: reduce){
+  .zoom-auto .zoom-inner{ animation: none !important; }
+  .zoom-hover:hover .zoom-inner{ transform: none !important; }
 }
