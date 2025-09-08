@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KOMODO — Gestión de colas y tickets de Soporte TI</title>
   <meta name="description" content="KOMODO: plataforma modular para gestionar colas, tickets e incidencias de soporte técnico con paneles, APIs e integraciones.">
-  <!-- CSS externo -->
+
   <link rel="stylesheet" href="./css/estilos.css">
-  <!-- Favicon (opcional, puedes usar un PNG cuadrado 32x32) -->
+
   <link rel="icon" type="image/png" href="./img/icon.png" sizes="32x32">
 </head>
 <body>
@@ -15,11 +15,9 @@
   <header>
     <div class="container">
       <nav>
-        <!-- Marca: versión horizontal con eslogan -->
         <a class="brand brand--horizontal" href="#inicio" aria-label="Ir al inicio">
           <img src="./img/logohorizontal.png" alt="KOMODO — Tu solución en gestión de TI">
         </a>
-
         <div class="menu" id="menu">
           <a href="#paquetes">Paquetes</a>
           <a href="#caracteristicas">Características</a>
@@ -35,8 +33,6 @@
 <!-- ========= HERO ========= -->
 <section id="inicio" class="hero section">
   <div class="container wrap">
-
-    <!-- Columna izquierda: copy -->
     <div>
       <span class="chip">Gestión de colas y tickets TI</span>
       <h1>
@@ -65,8 +61,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Columna derecha: panel con zoom-pan (ocupa el lugar de la imagen original) -->
     <div>
       <div class="zoom-box zoom-auto zoom-hover" id="hero-mockup" aria-hidden="true">
         <div class="zoom-inner">
@@ -118,7 +112,7 @@
       </article>
 
       <article class="card reveal">
-        <h3>KOMODO Live Enterprise</h3> <!-- <- cerrado -->
+        <h3>KOMODO Live Enterprise</h3>
         <p>Gestión de colas en sala: kioscos, turneros, pantallas y notificaciones en tiempo real.</p>
         <div class="actions">
           <a class="btn" href="#demo">Cotizar</a>
@@ -127,7 +121,7 @@
       </article>
 
       <article class="card reveal">
-        <h3>KOMODO Chat Starter</h3> <!-- <- cerrado -->
+        <h3>KOMODO Chat Starter</h3>
         <p>Atiende por WhatsApp, WebChat o correo y genera tickets automáticamente con bots y reglas.</p>
         <div class="actions">
           <a class="btn" href="#demo">Cotizar</a>
@@ -141,7 +135,7 @@
   <!-- ========= CARACTERÍSTICAS ========= -->
   <section id="caracteristicas" class="section">
     <div class="container">
-      <h2>Características clave</h2>
+      <h2>Características Clave</h2>
       <p class="lead">Todo lo que necesitas para un soporte efectivo, medible y escalable.</p>
 
       <div class="grid" style="grid-template-columns:repeat(3,1fr)">
@@ -204,7 +198,7 @@
   </div>
 </section>
 
-  <!-- ========= DEMO / FORMULARIO ========= -->
+  <!-- ========= FORMULARIO ========= -->
   <section id="demo" class="section">
     <div class="container">
       <h2>Solicitar una demo</h2>
@@ -261,7 +255,7 @@
         <div class="form-actions">
           <button class="btn" type="submit">Enviar solicitud</button>
           <a class="btn ghost" href="mailto:ventas@komodo.ti?subject=Solicitud%20de%20demo">Escribir por correo</a>
-          <a class="btn ghost" href="https://wa.me/+51934451943" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn ghost wa" href="https://wa.me/+51934451943" target="_blank" rel="noopener">WhatsApp</a>
         </div>
         <p id="formMsg" class="muted" style="margin:6px 0 0"></p>
       </form>
@@ -304,12 +298,9 @@
   <!-- ========= FOOTER ========= -->
   <footer class="footer">
   <div class="container">
-    <!-- IZQUIERDA: logo / marca -->
     <div class="brand">
       <img src="img/logovertical.png" alt="KOMODO" />
     </div>
-
-    <!-- CENTRO: enlaces -->
     <nav class="links" aria-label="Enlaces del sitio">
       <a class="chip" href="#paquetes">Paquetes</a>
       <a class="chip" href="#caracteristicas">Características</a>
@@ -317,21 +308,17 @@
       <a class="chip" href="#demo">Demo</a>
       <a class="chip" href="#contacto">Contacto</a>
     </nav>
-
-    <!-- ABAJO (100% ancho): copyright centrado -->
     <div class="copy">© <span id="year"></span> KOMODO. Todos los derechos reservados.</div>
   </div>
 </footer>
 
-  <!-- ========= JS INTEGRADO ========= -->
+  <!-- ========= JS ========= -->
 
     <script>
-  // año automático
   document.getElementById('year').textContent = new Date().getFullYear();
    </script>
 
     <script>
-  // Pausar el pan/zoom cuando el mockup no sea visible (ahorra recursos)
   const zinners = document.querySelectorAll('.zoom-auto .zoom-inner');
   if (zinners.length){
     const zio = new IntersectionObserver((entries) => {
@@ -344,7 +331,6 @@
 </script>
 
   <script>
-    // ===== Menú móvil =====
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
     if (burger && menu) {
@@ -355,13 +341,12 @@
       });
     }
 
-    // ===== Animación Reveal (Intersection Observer) =====
     const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('in-view');
     } else {
-      e.target.classList.remove('in-view'); // <- se quita al salir para que pueda re-animar
+      e.target.classList.remove('in-view');
     }
     });
     }, { threshold: 0.1 });
@@ -371,10 +356,9 @@
 
 function runCounter(el) {
   const target = +el.dataset.target;
-  const step = Math.max(1, Math.floor(target / 120)); // ~2s
+  const step = Math.max(1, Math.floor(target / 120));
   let current = 0;
 
-  // Evitar múltiples animaciones simultáneas
   if (el.dataset.animId) cancelAnimationFrame(+el.dataset.animId);
 
   const inc = () => {
@@ -397,7 +381,6 @@ const countersObserver = new IntersectionObserver((entries) => {
     if (e.isIntersecting) {
       runCounter(el);
     } else {
-      // Al salir del viewport, cancelar y reiniciar a 0
       if (el.dataset.animId) {
         cancelAnimationFrame(+el.dataset.animId);
         delete el.dataset.animId;
@@ -409,8 +392,7 @@ const countersObserver = new IntersectionObserver((entries) => {
 
 counters.forEach(c => countersObserver.observe(c));
 
-
-    // ===== Parallax sutil en la tarjeta demo =====
+    // ===== Parallax=====
     const device = document.querySelector('.device');
     if (device) {
       device.addEventListener('mousemove', (e) => {
@@ -422,7 +404,7 @@ counters.forEach(c => countersObserver.observe(c));
       device.addEventListener('mouseleave', () => device.style.transform = 'none');
     }
 
-    // ===== Validación básica de formulario =====
+    // ===== Validación de formulario =====
     const form = document.getElementById('demoForm');
     const msg = document.getElementById('formMsg');
     if (form && msg) {
@@ -440,7 +422,6 @@ counters.forEach(c => countersObserver.observe(c));
       });
     }
 
-    // ===== Año dinámico en footer =====
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
   </script>
